@@ -4,10 +4,14 @@ import { DeleteForever } from '@mui/icons-material'
 import {
   Button,
   Container,
+  FormControl,
   IconButton,
+  InputAdornment,
+  InputLabel,
   Select,
   TextField,
-  Typography
+  Typography,
+  OutlinedInput,
 } from '@mui/material'
 import { Box } from '@mui/system' //é uma div
 import { useDropzone } from 'react-dropzone'
@@ -209,6 +213,28 @@ const Publish = () => {
           />
         </Box>
       </Container>
+
+      <Container maxWidth="md" sx={{ paddingBottom: 3}}>
+        <Box
+          sx={{
+            backgroundColor: theme.palette.background.white,
+            padding: 3,
+          }}>
+          <Typography component="h6" variant="h6" color="textPrimary">
+            Preço
+          </Typography>
+          <br />
+          <FormControl fullWidth variant="outlined">
+            <InputLabel>Valor</InputLabel>
+            <OutlinedInput 
+              onChange={() => {}}
+              startAdornment={<InputAdornment position="start">R$</InputAdornment>}
+              labelWidth={40}
+            />
+          </FormControl>
+        </Box>
+      </Container>
+
 
       <Container maxWidth="md" sx={{ paddingBottom: 3}}>
         <Box sx={{
