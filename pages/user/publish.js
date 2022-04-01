@@ -1,11 +1,44 @@
 
-import { Button, Container, Select, TextField, Typography } from '@mui/material'
+import { useState } from 'react'
+import { DeleteForever } from '@mui/icons-material'
+import {
+  Button,
+  Container,
+  IconButton,
+  Select,
+  TextField,
+  Typography
+} from '@mui/material'
 import { Box } from '@mui/system' //é uma div
+import { useDropzone } from 'react-dropzone'
 
 import TemplateDefault from '../../src/templates/Default'
 import theme from '../../src/theme'
 
 const Publish = () => {
+
+  const [files, setFiles] = useState ([])
+
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: 'image/*',
+    onDrop: acceptedFile => {
+      const newFiles = acceptedFile.map(file => {
+        return Object.assign(file, {
+          preview: URL.createObjectURL(file)
+        })
+      })
+
+      setFiles([
+        ...files,
+        ...newFiles
+      ])
+    }
+  })
+
+  const handleRemoveFile = fileName => {
+    const newFileState = files.filter(file => file.name !== fileName)
+    setFiles(newFileState)
+  }
 
   return (
     <TemplateDefault>
@@ -78,6 +111,82 @@ const Publish = () => {
           <Typography component="div" variant="body2" color="textPrimary">
             A primeira imagem é a foto principal do seu anúncio
           </Typography>
+          <Box sx={{display: 'flex', flexWrap: 'wrap', marginTop: '15px'}}>
+            <Box
+              {...getRootProps()}
+              sx={{
+                cursor: 'pointer',
+                width: 200,
+                height: 150,
+                padding: '10px',
+                margin: '0 15px 15px 0',
+                backgroundColor: theme.palette.background.default,
+                border: '2px dashed black',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                textAlign: 'center',
+              }}
+            >
+              <input {...getInputProps()} />
+              <Typography variant="body2" color="textPrimary">
+                Clique para adicionar ou arraste a imagem aqui.
+              </Typography>
+            </Box>
+
+            {
+              files.map((file, index) => (
+                <Box
+                  key={file.name}
+                  style={{ backgroundImage: `url(${file.preview})` }}
+                  sx={{
+                    position: 'relative',
+                    width: 200,
+                    height: 150,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center center',
+                    margin: '0 15px 15px 0',
+
+                    '&:hover .mask': {
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    },
+                  }}>
+                  {
+                    index === 0 ?
+                      <Box sx={{
+                        backgroundColor: 'green',
+                        padding: '4px 16px',
+                        position: 'absolute',
+                        bottom: 0,
+                        left: 0,
+                      }}>
+                        <Typography variant="body" color="secondary">
+                          Principal
+                        </Typography>
+                      </Box>
+                      : null
+                  }
+
+                  <Box
+                    className={'mask'}
+                    sx={{
+                      display: 'none',
+                      backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                      height: '100%',
+                      textAlign: 'center',
+
+                  }}>
+                    <IconButton color="secondary" fontSize="large" onClick={() => handleRemoveFile(file.name)}>
+                      <DeleteForever />
+                    </IconButton>
+                  </Box>
+                </Box>
+              ))
+            }
+
+          </Box>
         </Box>
       </Container>
 
