@@ -15,7 +15,7 @@ export default function Home() {
   
   return (
     <TemplateDefault>
-      <Container maxWidth="sm" sx={{ padding: (8, 0, 6), }}>
+      <Container maxWidth="sm">
         <Typography component="h1" variant="h2" align="center">
           Meus anúncios
         </Typography>
