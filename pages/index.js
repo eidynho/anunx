@@ -44,7 +44,7 @@ const Home = () => {
 
 
 
-      <Container maxWidth="md" sx={{ padding: (8, 0, 6) }}>
+      <Container maxWidth="lg" sx={{ padding: (8, 0, 6) }}>
         <Typography component="h2" variant="h4" align="center" color="textPrimary">
             Destaques
         </Typography>
