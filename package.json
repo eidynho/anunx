@@ -13,13 +13,14 @@
     "@emotion/react": "^11.8.2",
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.8.1",
-    "@material-ui/styles": "^4.11.4",
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.3",
+    "@mui/styles": "^5.5.3",
     "next": "12.1.4",
     "react": "18.0.0",
     "react-dom": "18.0.0",
-    "react-dropzone": "^12.0.4"
+    "react-dropzone": "^12.0.4",
+    "react-material-ui-carousel": "2.3.10-mui5"
   },
   "devDependencies": {
     "eslint": "8.12.0",
