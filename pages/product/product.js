@@ -13,8 +13,8 @@ import {
 import { Box } from '@mui/system'
 
 
-import TemplateDefault from '../src/templates/Default'
-import theme from '../src/theme'
+import TemplateDefault from '../../src/templates/Default'
+import theme from '../../src/theme'
 const Product = () => {
 
   return (

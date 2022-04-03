@@ -24,6 +24,7 @@ const Home = () => {
             display: 'flex',
             justifyContent: 'center',
             padding: 1,
+            paddingLeft: 3,
             marginTop: '20px',
           }}
         >
