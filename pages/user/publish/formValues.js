@@ -28,7 +28,7 @@ const validationSchema = yup.object().shape({
     .required('Campo obrigatório'),
 
   name: yup.string()
-  .required('Campo obrigatório'),
+    .required('Campo obrigatório'),
 
   email: yup.string()
     .email('Digite um e-mail válido')
