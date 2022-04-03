@@ -1,13 +1,10 @@
 
-import { useState } from 'react'
 import { Formik } from 'formik'
-import * as yup from 'yup'
 
 import {
   Button,
   Container,
   FormControl,
-  IconButton,
   InputAdornment,
   InputLabel,
   Select,
@@ -16,61 +13,20 @@ import {
   FormHelperText,
   Input,
 } from '@mui/material'
-import { DeleteForever } from '@mui/icons-material'
 import { Box } from '@mui/system' //é uma div
-import { useDropzone } from 'react-dropzone'
-
-import TemplateDefault from '../../src/templates/Default'
-import theme from '../../src/theme'
 
 
-
-const validationSchema = yup.object().shape({
-  title: yup.string()
-    .min(6, 'Escreva um título maior')
-    .max(80, 'Título muito grande')
-    .required('Campo obrigatório'),
-
-  category: yup.string()
-    .required('Campo obrigatório'),
-
-  description: yup.string()
-    .min(50, 'Escreva uma descrição com pelo menos 50 caracteres')
-    .required('Campo obrigatório'),
-
-  price: yup.number()
-    .required('Campo obrigatório'),
-
-  name: yup.string()
-  .required('Campo obrigatório'),
-
-  email: yup.string()
-    .email('Digite um e-mail válido')
-    .required('Campo obrigatório'),
-
-  phone: yup.number()
-    .required('Campo obrigatório'),
-
-  files: yup.array()
-    .min(1, 'Envie pelo menos uma foto')
-    .required('Campo obrigatório')
-})
+import TemplateDefault from '../../../src/templates/Default'
+import theme from '../../../src/theme'
+import { initialValues, validationSchema } from './formValues'
+import  FileUpload  from '../../../src/components/FileUpload'
 
 const Publish = () => {
 
   return (
     <TemplateDefault>
       <Formik
-        initialValues={{
-          title: '',
-          category: '',
-          description: '',
-          price: '',
-          name: '',
-          email: '',
-          phone: '',
-          files: [],
-        }}
+        initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(values) => {
           console.log('ok enviou', values)
@@ -85,28 +41,6 @@ const Publish = () => {
             handleSubmit,
             setFieldValue,
           }) => {
-
-            const { getRootProps, getInputProps } = useDropzone({
-              accept: 'image/*',
-              onDrop: acceptedFile => {
-                const newFiles = acceptedFile.map(file => {
-                  return Object.assign(file, {
-                    preview: URL.createObjectURL(file)
-                  })
-                })
-                
-                setFieldValue('files', [
-                  ...values.files,
-                  ...newFiles
-                ])
-              }
-            })
-          
-            const handleRemoveFile = fileName => {
-              const newFileState = values.files.filter(file => file.name !== fileName)
-              setFieldValue('files', newFileState)
-            }
-
 
             return (
               <form onSubmit={handleSubmit}>
@@ -176,93 +110,12 @@ const Publish = () => {
                       backgroundColor: theme.palette.background.white,
                       padding: 3,
                     }}>
-                    <Typography component="h6" variant="h6" color={errors.files && touched.files ? 'error' : 'textPrimary'}>
-                      Imagens
-                    </Typography>
-                    <Typography component="div" variant="body2" color={errors.files && touched.files ? 'error' : 'textPrimary'}>
-                      A primeira imagem é a foto principal do seu anúncio
-                    </Typography>
-                    {
-                      errors.files && touched.files
-                        ? <Typography variant="body2" color="error" gutterBottom>{errors.files}</Typography>
-                        : null
-                    }
-                    <Box sx={{display: 'flex', flexWrap: 'wrap', marginTop: '15px'}}>
-                      <Box
-                        {...getRootProps()}
-                        sx={{
-                          cursor: 'pointer',
-                          width: 200,
-                          height: 150,
-                          padding: '10px',
-                          margin: '0 15px 15px 0',
-                          backgroundColor: theme.palette.background.default,
-                          border: '2px dashed black',
-                          display: 'flex',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          textAlign: 'center',
-                        }}
-                      >
-                        <input names="files" {...getInputProps()} />
-                        <Typography variant="body2" color={errors.files && touched.files ? 'error' : 'textPrimary'}>
-                          Clique para adicionar ou arraste a imagem aqui.
-                        </Typography>
-                      </Box>
-
-                      {
-                        values.files.map((file, index) => (
-                          <Box
-                            key={file.name}
-                            style={{ backgroundImage: `url(${file.preview})` }}
-                            sx={{
-                              position: 'relative',
-                              width: 200,
-                              height: 150,
-                              backgroundSize: 'cover',
-                              backgroundPosition: 'center center',
-                              margin: '0 15px 15px 0',
-
-                              '&:hover .mask': {
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                              },
-                            }}>
-                            {
-                              index === 0 ?
-                                <Box sx={{
-                                  backgroundColor: 'green',
-                                  padding: '4px 16px',
-                                  position: 'absolute',
-                                  bottom: 0,
-                                  left: 0,
-                                }}>
-                                  <Typography variant="body" color="secondary">
-                                    Principal
-                                  </Typography>
-                                </Box>
-                                : null
-                            }
-
-                            <Box
-                              className={'mask'}
-                              sx={{
-                                display: 'none',
-                                backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                                height: '100%',
-                                textAlign: 'center',
-
-                            }}>
-                              <IconButton color="secondary" fontSize="large" onClick={() => handleRemoveFile(file.name)}>
-                                <DeleteForever />
-                              </IconButton>
-                            </Box>
-                          </Box>
-                        ))
-                      }
-
-                    </Box>
+                    <FileUpload 
+                      files={values.files}
+                      errors={errors.files}
+                      touched={touched.files}
+                      setFieldValue={setFieldValue}
+                    />
                   </Box>
                 </Container>
 
