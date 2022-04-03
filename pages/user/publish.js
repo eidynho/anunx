@@ -16,6 +16,7 @@ import {
   OutlinedInput,
   MenuItem,
   FormHelperText,
+  Input,
 } from '@mui/material'
 import { DeleteForever } from '@mui/icons-material'
 import { Box } from '@mui/system' //é uma div
@@ -35,7 +36,11 @@ const validationSchema = yup.object().shape({
   category: yup.string()
     .required('Campo obrigatório'),
 
-  
+  description: yup.string()
+    .min(50, 'Escreva uma descrição com pelo menos 50 caracteres')
+    .required('Campo obrigatório'),
+
+
 })
 
 const Publish = () => {
@@ -70,6 +75,7 @@ const Publish = () => {
         initialValues={{
           title: '',
           category: '',
+          description: '',
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
@@ -100,31 +106,28 @@ const Publish = () => {
                     backgroundColor: theme.palette.background.white,
                     padding: 3,
                   }}>
-                  <Typography component="h6" variant="h6" color="textPrimary">
-                    Título do anúncio
-                  </Typography>
-                  <TextField
-                  name="title"
-                  value={values.title}
-                  onChange={handleChange}
-                  label="ex.: Bicicleta aro 18 com garantia" 
-                  size="small"
-                  fullWidth="true"
-                  sx={{marginBottom: 3}}
-                  error={errors.title}
-                  helperText={errors.title}
-                  />
 
-                  <Typography component="h6" variant="h6" color="textPrimary">
-                    Categoria
-                  </Typography>
+                  <FormControl error={errors.title} fullWidth>
+                    <InputLabel>Título do Anúncio</InputLabel>
+                    <Input
+                    name="title"
+                    value={values.title}
+                    onChange={handleChange}
+                    />
+                    <FormHelperText sx={{ marginBottom: 3 }}>
+                      { errors.title }
+                    </FormHelperText>
+                  </FormControl>
+
 
                   <FormControl error={errors.category} fullWidth>
+                    <InputLabel>Categoria</InputLabel>
                     <Select 
                       name="category"
                       values={values.category}
                       onChange={handleChange}
                       fullWidth
+                      variant="standard"
                     >
                       <MenuItem value="Bebê e criança">Bebê e criança</MenuItem>
                       <MenuItem value="Agricultura">Agricultura</MenuItem>
@@ -245,18 +248,18 @@ const Publish = () => {
                       backgroundColor: theme.palette.background.white,
                       padding: 3,
                     }}>
-                    <Typography component="h6" variant="h6" color="textPrimary">
-                      Descrição
-                    </Typography>
-                    <Typography component="div" variant="body2" color="textPrimary">
-                      Escreva os detalhes do que está vendendo
-                    </Typography>
-                    <TextField
-                      multiline
-                      rows={6}
-                      variant="outlined"
-                      fullWidth="true"
-                    />
+                    <FormControl error={errors.description} fullWidth>
+                      <InputLabel>Escreva os detalhes do que está vendendo</InputLabel>
+                      <Input
+                        name="description"
+                        multiline
+                        rows={6}
+                        variant="filled"
+                      />
+                      <FormHelperText>
+                        { errors.description }
+                      </FormHelperText>
+                    </FormControl>
                   </Box>
                 </Container>
 
