@@ -1,9 +1,12 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { Formik } from 'formik'
+import axios from 'axios'
 
 import {
   Box,
   Button,
+  CircularProgress,
   Container,
   FormControl,
   FormHelperText,
@@ -15,17 +18,33 @@ import {
 import { initialValues, validationSchema } from './formValues'
 import TemplateDefault from '../../../src/templates/Default'
 import theme from '../../../src/theme'
+import useToasty from '../../../src/contexts/Toasty'
 
 const Signup = () => {
+  const { setToasty } = useToasty()
+  const router = useRouter()
+
+  const handleFormSubmit = async values => {
+    const response = await axios.post('/api/users', values)
+
+    if (response.data.success) {
+      setToasty({
+        open: true,
+        severity: 'success',
+        text: 'Cadastro realizado com sucesso'
+      })
+
+      //redirecionar para página de login
+      router.push('/auth/signin')
+    }
+  }
 
   return (
       <TemplateDefault>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={(values) => {
-            console.log('ok enviou', values)
-        }}
+          onSubmit={handleFormSubmit}
         >
           {
             ({
@@ -34,7 +53,7 @@ const Signup = () => {
               errors,
               handleChange,
               handleSubmit,
-              setFieldValue,
+              isSubmitting,
             }) => {
 
               return (
@@ -105,15 +124,22 @@ const Signup = () => {
                         </FormHelperText>
                       </FormControl>
 
-                      <Button 
-                        type="submit" 
-                        variant="contained"
-                        color="primary" 
-                        fullWidth
-                        sx={{ marginTop: 2, marginBottom: 1 }}
-                      >
-                        CADASTRAR
-                      </Button>
+                      {
+                        isSubmitting 
+                        ? (
+                          <CircularProgress sx={{ display: 'block', margin: '8px auto' }} />
+                        ) : (
+                          <Button 
+                            type="submit" 
+                            variant="contained"
+                            color="primary" 
+                            fullWidth
+                            sx={{ marginTop: 2, marginBottom: 1 }}
+                          >
+                            CADASTRAR
+                          </Button>
+                        )
+                      }
 
                       <Link href="#" passHref>
                         <Typography
@@ -123,7 +149,7 @@ const Signup = () => {
                           color='black'
                           sx={{ textDecoration: 'none' }}
                         >
-                          Já tem uma conta? Entrei aqui
+                          Já tem uma conta? Entre aqui
                         </Typography>
                       </Link>
 
