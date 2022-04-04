@@ -62,7 +62,7 @@ const Signup = () => {
                     <Typography component="h1" variant="h2" align="center">
                       Crie sua conta
                     </Typography>
-                    <Typography component="h2" variant="h5" align="center">
+                    <Typography component="h2" variant="h5" align="center" gutterBottom >
                       E anuncie para todo Brasil!
                     </Typography>
                   </Container>
@@ -141,7 +141,7 @@ const Signup = () => {
                         )
                       }
 
-                      <Link href="#" passHref>
+                      <Link href="/auth/signin" passHref>
                         <Typography
                           cursor="pointer"
                           component="a"
