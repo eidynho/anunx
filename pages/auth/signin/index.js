@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { Formik } from 'formik'
 import axios from 'axios'
@@ -24,7 +25,6 @@ import useToasty from '../../../src/contexts/Toasty'
 
 const Signin = () => {
   const router = useRouter()
-  const { setToasty } = useToasty()
 
   const { data: session } = useSession()
   console.log(session)
@@ -36,6 +36,10 @@ const Signin = () => {
       callbackUrl: 'http://localhost:3000/user/dashboard'
     })
   }
+  
+  const handleGoogleLogin = () => signIn('google', {
+    callbackUrl: 'http://localhost:3000/user/dashboard'
+  })
   
 
   return (
@@ -68,6 +72,39 @@ const Signin = () => {
                       backgroundColor: theme.palette.background.white,
                       padding: 3,
                     }}>
+
+                      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          starticon={
+                            <Image 
+                            src="/images/logo_google.svg"
+                            alt="Login com Google"
+                            width={20}
+                            height={20} />
+                          }
+                          onClick={handleGoogleLogin}>Entrar com Google</Button>
+                      </Box>
+
+                      <Box sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: '#e8e8e8',
+                        width: '100%',
+                        height: '1px',
+                        marginTop: 5,
+                        marginBottom: 4,
+                        
+                        '& span': {
+                          backgroundColor: '#FFF',
+                           padding: '0 30px' 
+                        }
+                      }}>
+                        <span>ou</span>
+                      </Box>
+
 
                       {
                         router.query.i === '1'
