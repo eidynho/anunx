@@ -2,8 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { Formik } from 'formik'
-import axios from 'axios'
-import { signIn, useSession } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 
 import {
   Alert,
@@ -21,13 +20,9 @@ import {
 import { initialValues, validationSchema } from './formValues'
 import TemplateDefault from '../../../src/templates/Default'
 import theme from '../../../src/theme'
-import useToasty from '../../../src/contexts/Toasty'
 
 const Signin = () => {
   const router = useRouter()
-
-  const { data: session } = useSession()
-  console.log(session)
   
   const handleFormSubmit = async values => {
     signIn('credentials', {
@@ -77,7 +72,7 @@ const Signin = () => {
                         <Button
                           variant="contained"
                           color="primary"
-                          starticon={
+                          startIcon={
                             <Image 
                             src="/images/logo_google.svg"
                             alt="Login com Google"
