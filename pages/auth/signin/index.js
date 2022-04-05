@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { Formik } from 'formik'
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 
 import {
   Alert,
@@ -22,6 +22,10 @@ import TemplateDefault from '../../../src/templates/Default'
 import theme from '../../../src/theme'
 
 const Signin = ({ APP_URL }) => {
+  const { data: session } = useSession()
+  console.log(session)
+
+
   const router = useRouter()
   
   const handleFormSubmit = async values => {
