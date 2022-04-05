@@ -2,8 +2,10 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Formik } from 'formik'
 import axios from 'axios'
+import { signIn, useSession } from 'next-auth/react'
 
 import {
+  Alert,
   Box,
   Button,
   CircularProgress,
@@ -21,11 +23,20 @@ import theme from '../../../src/theme'
 import useToasty from '../../../src/contexts/Toasty'
 
 const Signin = () => {
-  const { setToasty } = useToasty()
   const router = useRouter()
+  const { setToasty } = useToasty()
 
+  const { data: session } = useSession()
+  console.log(session)
+  
   const handleFormSubmit = async values => {
+    signIn('credentials', {
+      email: values.email,
+      password: values.password,
+      callbackUrl: 'http://localhost:3000/user/dashboard'
+    })
   }
+  
 
   return (
       <TemplateDefault>
@@ -57,6 +68,16 @@ const Signin = () => {
                       backgroundColor: theme.palette.background.white,
                       padding: 3,
                     }}>
+
+                      {
+                        router.query.i === '1'
+                          ? (
+                            <Alert severity="error" sx={{ margin: '20px 0' }}>
+                              Usuário ou senha inválidos
+                            </Alert>
+                          )
+                          : null
+                      }
 
                       <FormControl error={errors.email && touched.email} fullWidth>
                         <InputLabel>E-mail</InputLabel>
