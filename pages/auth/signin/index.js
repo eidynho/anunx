@@ -21,19 +21,19 @@ import { initialValues, validationSchema } from './formValues'
 import TemplateDefault from '../../../src/templates/Default'
 import theme from '../../../src/theme'
 
-const Signin = () => {
+const Signin = ({ APP_URL }) => {
   const router = useRouter()
   
   const handleFormSubmit = async values => {
     signIn('credentials', {
       email: values.email,
       password: values.password,
-      callbackUrl: 'http://localhost:3000/user/dashboard'
+      callbackUrl: `${APP_URL}/user/dashboard`
     })
   }
   
   const handleGoogleLogin = () => signIn('google', {
-    callbackUrl: 'http://localhost:3000/user/dashboard'
+    callbackUrl: `${APP_URL}/user/dashboard`
   })
   
 
@@ -175,6 +175,14 @@ const Signin = () => {
         </Formik>
       </TemplateDefault>
   )
+}
+
+export async function getServerSideProps() {
+  return {
+    props: {
+      APP_URL: process.env.APP_URL
+    }
+  }
 }
 
 export default Signin
