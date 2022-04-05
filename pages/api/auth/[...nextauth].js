@@ -22,14 +22,17 @@ export default NextAuth({
           return user
         } else {
           console.log('ERRARARARARARARARRDO')
-          throw '/auth/signin?i=1'
-          //return null
+          return null
         }
-
         
       }
     }),
   ],
+
+  pages: {
+    signIn: '/auth/signin',
+    error: '/auth/signin?i=1',
+  },
 
   session: {
     jwt: true,
