@@ -10,7 +10,7 @@ import {
   Typography
 } from '@mui/material'
 import { Box } from '@mui/system'
-import SearchIcon from '@mui/icons-material/search'
+import SearchIcon from '@mui/icons-material/Search'
 
 import ProductsModel from '../../src/models/products'
 import TemplateDefault from '../../src/templates/Default'

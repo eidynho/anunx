@@ -12,7 +12,7 @@ import {
   Paper,
   Typography,
 } from '@mui/material'
-import SearchIcon from '@mui/icons-material/search'
+import SearchIcon from '@mui/icons-material/Search'
 
 import TemplateDefault from '../src/templates/Default'
 import Card from '../src/components/Card'
