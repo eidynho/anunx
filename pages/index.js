@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 import slugify from 'slugify'
 
@@ -21,6 +23,14 @@ import { formatCurrency } from '../src/utils/currency'
 
 
 const Home = ({ products }) => {
+  const router = useRouter()
+  const [search, setSearch] = useState()
+
+  const handleSubmitSearch = () => {
+    router.push({
+      pathname: `/search/${search}`
+    })
+  }
 
   return (
     <TemplateDefault>
@@ -38,10 +48,13 @@ const Home = ({ products }) => {
           }}
         >
           <InputBase
+            onChange={(e) => {
+              setSearch(e.target.value)
+            }}
             placeholder="Ex.: iPhone 12 com garantia"
             fullWidth
           />
-          <IconButton>
+          <IconButton onClick={handleSubmitSearch}>
             <SearchIcon />
           </IconButton>
         </Paper>
