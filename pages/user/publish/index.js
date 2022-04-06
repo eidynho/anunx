@@ -69,7 +69,7 @@ const Publish = ({ accessToken, image }) => {
         formData.append(field, values[field])
       }
     }
-    axios.post('/api/products', formData)
+    axios.post('/api/products/add', formData)
       .then(handleSuccess)
       .catch(handleError)
   }
@@ -291,12 +291,12 @@ const Publish = ({ accessToken, image }) => {
 Publish.requireAuth = true
 
 export async function getServerSideProps({ req }) {
-  const { accessToken, user } = await getSession({ req })
+  const session = await getSession({ req })
 
   return {
     props: {
-      accessToken,
-      image: user.image? user.image : null
+      accessToken: session.accessToken,
+      image: session.user.image
     },
 
   }
