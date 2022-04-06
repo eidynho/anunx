@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { getSession } from 'next-auth/react'
 import Link from 'next/link'
 import axios from 'axios'
+import slugify from 'slugify'
 import {
-
   Button,
   Container,
   Dialog,
@@ -12,6 +12,7 @@ import {
   DialogContentText,
   DialogTitle,
   Grid,
+  Link as LinkMUI,
   Typography,
 } from '@mui/material'
 
@@ -114,29 +115,38 @@ const Home = ({ products }) => {
           : null
       }
       
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <Grid container spacing={4}>
           {
             products.map(product => {
+              const category = slugify(product.category).toLowerCase()
+              const title = slugify(product.title).toLowerCase()
+
               if (removedProducts.includes(product._id)) return null
 
               return (
               <Grid key={product._id} item xs={12} sm={6} md={4}>
-                <Card 
-                  image={`/uploads/${product.files[0].name}`}
-                  title={product.title}
-                  subtitle={formatCurrency(product.price)}
-                  actions={
-                    <>
-                      <Button size="small" color="primary">
-                        Editar
-                      </Button>
-                      <Button size="small" color="primary" onClick={() => handleClickRemove(product._id)}>
-                        Remover
-                      </Button>
-                    </>
-                  }
-                />
+                <Link href={`/${category}/${title}/${product._id}`} passHref>
+                  <LinkMUI sx={{
+                    textDecoration: 'none'
+                  }}>
+                    <Card
+                      image={`/uploads/${product.files[0].name}`}
+                      title={product.title}
+                      subtitle={formatCurrency(product.price)}
+                      actions={
+                        <>
+                          <Button size="small" color="primary">
+                            Editar
+                          </Button>
+                          <Button size="small" color="primary" onClick={() => handleClickRemove(product._id)}>
+                            Remover
+                          </Button>
+                        </>
+                      }
+                    />
+                  </LinkMUI>
+                </Link>
               </Grid>
             )
           })

@@ -10,7 +10,7 @@ import {
   Grid,
   Typography,
 } from '@mui/material'
-import { Box, width } from '@mui/system'
+import { Box } from '@mui/system'
 
 
 import TemplateDefault from '../../../src/templates/Default'
@@ -23,7 +23,6 @@ const Product = ({ product }) => {
 
   return (
     <TemplateDefault>
-      {console.log(product)}
       <Container maxWidth="lg">
         <Grid container spacing={3}>
           <Grid item xs={8}>
@@ -48,7 +47,7 @@ const Product = ({ product }) => {
                         image={`/uploads/${file.name}`}
                         title={product.title}
                         sx={{
-                          paddingTop: '66%'
+                          paddingTop: '100%'
                         }}
                       />
                     </Card>

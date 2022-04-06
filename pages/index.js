@@ -73,7 +73,6 @@ const Home = ({ products }) => {
               const category = slugify(product.category).toLowerCase()
               const title = slugify(product.title).toLowerCase()
 
-
               return (
                 <Grid key={product.id} item xs={12} sm={6} md={4}>
                   <Link href={`/${category}/${title}/${product._id}`} passHref>

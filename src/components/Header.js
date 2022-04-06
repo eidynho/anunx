@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { signOut, useSession } from 'next-auth/react'
+import Link from 'next/link'
 
 import { AccountCircle } from '@mui/icons-material'
 import {
@@ -15,7 +16,6 @@ import {
   MenuItem,
   Divider,
 } from '@mui/material'
-import Link from 'next/link'
 
 export default function ButtonAppBar() {
   const [anchorUserMenu, setAnchorUserMenu] = useState(false)
@@ -28,14 +28,20 @@ export default function ButtonAppBar() {
       <AppBar position="static" elevation={3}>
         <Container maxWidth="lg">
           <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Anunx
-            </Typography>
-            <Link href={session ? '/user/publish' : '/auth/signin'} passHref>
-              <Button color="inherit" variant="outlined" sx={{ marginRight: '10px' }}>
-                Anunciar e vender
-              </Button>
+            <Link href="/" passHref>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1, cursor: 'pointer' }} >
+                Anunx
+              </Typography>
             </Link>
+            {
+              session
+              ? null
+              : <Link href={session ? '/user/publish' : '/auth/signin'} passHref>
+                <Button color="inherit" variant="outlined" sx={{ marginRight: '10px' }}>
+                  Anuncie aqui
+                </Button>
+              </Link>
+            }
             {
               session
                 ? (
