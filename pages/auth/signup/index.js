@@ -15,7 +15,7 @@ import {
   Typography
 } from '@mui/material'
 
-import { initialValues, validationSchema } from './formValues'
+import { initialValues, validationSchema } from '../../../src/components/formValues/formValuesSignup'
 import TemplateDefault from '../../../src/templates/Default'
 import theme from '../../../src/theme'
 import useToasty from '../../../src/contexts/Toasty'

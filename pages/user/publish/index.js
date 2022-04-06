@@ -21,7 +21,7 @@ import { Box } from '@mui/system' //é uma div
 import useToasty from '../../../src/contexts/Toasty'
 import TemplateDefault from '../../../src/templates/Default'
 import theme from '../../../src/theme'
-import { initialValues, validationSchema } from './formValues'
+import { initialValues, validationSchema } from '../../../src/components/formValues/formValuesPublish'
 import  FileUpload  from '../../../src/components/FileUpload'
 
 

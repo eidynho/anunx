@@ -13,7 +13,7 @@ const CheckAuth = ({ Component, pageProps }) => {
       router.replace('/auth/signin')
     }
     
-  }, [session, status])
+  }, [router, session, status])
   
   if (session) {
     return <Component {...pageProps} />
