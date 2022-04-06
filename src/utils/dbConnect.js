@@ -29,10 +29,12 @@ async function dbConnect() {
       bufferCommands: false,
     }
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      console.log('connect to database!')
-      return mongoose
-    })
+    cached.promise = mongoose.connect(MONGODB_URI, opts)
+      .then((mongoose) => {
+        console.log('connect to database!')
+        return mongoose
+      })
+      .catch(error => error, 'erro ao se conectar ao banco de dados')
   }
   cached.conn = await cached.promise
   return cached.conn
