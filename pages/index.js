@@ -45,6 +45,7 @@ const Home = ({ products }) => {
             padding: 1,
             paddingLeft: 3,
             marginTop: '20px',
+            border: '1px solid #054A29'
           }}
         >
           <InputBase
@@ -55,7 +56,7 @@ const Home = ({ products }) => {
             fullWidth
           />
           <IconButton onClick={handleSubmitSearch}>
-            <SearchIcon />
+            <SearchIcon sx={{ color: '#054A29' }} />
           </IconButton>
         </Paper>
       </Container>

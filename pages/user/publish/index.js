@@ -273,8 +273,16 @@ const Publish = ({ accessToken, image }) => {
                   <Box textAlign="right">
                     {
                       isSubmitting
-                        ? <CircularProgress sx={{ display: 'block', margin: '8px auto' }} />
-                        : <Button type="submit" variant="contained" color="primary">Publicar anúncio</Button>
+                        ? <CircularProgress sx={{ display: 'block', margin: '8px auto', background: '#054A29' }} />
+                        : <Button type="submit" variant="contained"
+                        sx={{ 
+                          background: '#054A29',
+                          
+                          '&:hover': {
+                            background: '#054A29',
+                            filter: 'brightness(0.90)',
+                          }
+                         }} >Publicar anúncio</Button>
                         
                     }
                   </Box>

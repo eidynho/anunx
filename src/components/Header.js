@@ -25,7 +25,7 @@ export default function ButtonAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" elevation={3}>
+      <AppBar position="static" elevation={3} sx={{ background: '#054A29'}}>
         <Container maxWidth="lg">
           <Toolbar>
             <Link href="/" passHref>

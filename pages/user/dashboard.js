@@ -99,7 +99,13 @@ const Home = ({ products }) => {
             sx={{ 
               marginTop: '20px',
               marginBottom: '40px',
-              display: 'inline-block'
+              display: 'inline-block',
+              background: '#054A29',
+
+              '&:hover': {
+                background: '#054A29',
+                filter: 'brightness(0.90)',
+              }
             }}
           >
             Publicar novo anúncio
@@ -126,27 +132,27 @@ const Home = ({ products }) => {
 
               return (
               <Grid key={product._id} item xs={12} sm={6} md={4}>
-                <Link href={`/${category}/${title}/${product._id}`} passHref>
-                  <LinkMUI sx={{
-                    textDecoration: 'none'
-                  }}>
                     <Card
                       image={`/uploads/${product.files[0].name}`}
                       title={product.title}
                       subtitle={formatCurrency(product.price)}
                       actions={
                         <>
-                          <Button size="small" color="primary">
-                            Editar
-                          </Button>
+                          <Link href={`/${category}/${title}/${product._id}`} passHref>
+                            <LinkMUI sx={{
+                              textDecoration: 'none'
+                            }}>
+                              <Button size="small" color="primary">
+                                Editar
+                              </Button>
+                            </LinkMUI>
+                          </Link>
                           <Button size="small" color="primary" onClick={() => handleClickRemove(product._id)}>
                             Remover
                           </Button>
                         </>
                       }
                     />
-                  </LinkMUI>
-                </Link>
               </Grid>
             )
           })

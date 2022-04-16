@@ -14,7 +14,7 @@ const Footer = () => {
         <Grid item xs={6} sm={3}>
           <Box textAlign="center">
             <Link href="#" passHref>
-              <Typography color="textSecondary" variant="subtitle1" sx={{cursor: 'pointer'}}>
+              <Typography variant="subtitle1" sx={{cursor: 'pointer', color: '#054A29'}}>
                 <a>Ajuda e contato</a>
               </Typography>
             </Link>
@@ -24,7 +24,7 @@ const Footer = () => {
         <Grid item xs={6} sm={3}>
           <Box textAlign="center">
             <Link href="#" passHref>
-              <Typography color="textSecondary" variant="subtitle1" sx={{cursor: 'pointer'}}>
+              <Typography variant="subtitle1" sx={{cursor: 'pointer', color: '#054A29'}}>
                 <a>Dicas de segurança</a>
               </Typography>
             </Link>
@@ -34,7 +34,7 @@ const Footer = () => {
         <Grid item xs={6} sm={3}>
           <Box textAlign="center">
             <Link href="#" passHref>
-              <Typography color="textSecondary" variant="subtitle1" sx={{cursor: 'pointer'}}>
+              <Typography variant="subtitle1" sx={{cursor: 'pointer', color: '#054A29'}}>
                 <a>Anunciar e vender</a>
               </Typography>
             </Link>
@@ -44,7 +44,7 @@ const Footer = () => {
         <Grid item xs={6} sm={3}>
           <Box textAlign="center">
             <Link href="#" passHref>
-              <Typography color="textSecondary" variant="subtitle1" sx={{cursor: 'pointer'}}>
+              <Typography variant="subtitle1" sx={{cursor: 'pointer', color: '#054A29'}}>
                 <a>Plano profissional</a>
               </Typography>
             </Link>

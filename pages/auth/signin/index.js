@@ -73,7 +73,13 @@ const Signin = ({ APP_URL }) => {
                       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                         <Button
                           variant="contained"
-                          color="primary"
+                          sx={{ 
+                            background: 'rgb(174, 47, 33)',
+                            '&:hover': {
+                              background: 'rgb(174, 47, 33)',
+                              filter: 'brightness(0.85)',
+                            }
+                          }}
                           startIcon={
                             <Image 
                             src="/images/logo_google.svg"
@@ -149,7 +155,15 @@ const Signin = ({ APP_URL }) => {
                             variant="contained"
                             color="primary" 
                             fullWidth
-                            sx={{ marginTop: 2, marginBottom: 1 }}
+                            sx={{ 
+                              marginTop: 2,
+                              marginBottom: 1,
+                              background: '#054A29',
+                              '&:hover': {
+                                background: '#054A29',
+                                filter: 'brightness(0.85)'
+                              }
+                            }}
                           >
                             ENTRAR
                           </Button>

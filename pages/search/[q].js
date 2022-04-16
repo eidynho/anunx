@@ -31,6 +31,7 @@ const List = ({ products }) => {
             paddingLeft: 3,
             marginTop: '20px',
             marginBottom: 3,
+            border: '1px solid #054A29',
           }}
         >
           <InputBase
@@ -38,7 +39,7 @@ const List = ({ products }) => {
             fullWidth
           />
           <IconButton>
-            <SearchIcon />
+            <SearchIcon sx={{ color: '#054A29' }} />
           </IconButton>
         </Paper>
 

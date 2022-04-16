@@ -11,6 +11,7 @@ const Default = ({ children }) => {
        sx={{
          paddingTop: 6,
          paddingBottom: 6,
+
        }}
       >
         {children}
